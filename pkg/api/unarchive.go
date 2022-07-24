@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 )
 
 const maxFileSize = 1073741824 // 1GB
@@ -31,7 +30,6 @@ func unarchive(dest io.Writer, src io.Reader) error {
 		if err != nil {
 			return fmt.Errorf("read a tarball: %w", err)
 		}
-		log.Printf("[DEBUG] hdr.Name: %s", hdr.Name)
 		if hdr.Name != "aqua" {
 			continue
 		}
