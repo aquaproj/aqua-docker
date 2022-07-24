@@ -72,16 +72,6 @@ func Run(ldflags *LDFlags) error {
 	}
 
 	log.Println("[INFO] Installing aqua")
-	aquaFile, err := os.CreateTemp("", "aqua")
-	if err != nil {
-		return fmt.Errorf("create a temporal file to install aqua: %w", err)
-	}
-	defer aquaFile.Close()
-	param.AquaInstallPath = aquaFile.Name()
-	if err := os.Chmod(param.AquaInstallPath, binPermission); err != nil {
-		return fmt.Errorf("change aqua's file permission: %w", err)
-	}
-
 	if err := installAqua(ctx, param); err != nil {
 		return fmt.Errorf("install aqua: %w", err)
 	}
@@ -127,6 +117,16 @@ func copyFile(ctx context.Context, aquaInstallPath, dest, bin string) error {
 }
 
 func installAqua(ctx context.Context, param *Param) error {
+	aquaFile, err := os.CreateTemp("", "aqua")
+	if err != nil {
+		return fmt.Errorf("create a temporal file to install aqua: %w", err)
+	}
+	defer aquaFile.Close()
+	param.AquaInstallPath = aquaFile.Name()
+	if err := os.Chmod(param.AquaInstallPath, binPermission); err != nil {
+		return fmt.Errorf("change aqua's file permission: %w", err)
+	}
+
 	u := fmt.Sprintf("https://github.com/aquaproj/aqua/releases/%s/download/aqua_%s_%s.tar.gz", param.AquaVersion, runtime.GOOS, runtime.GOARCH)
 	log.Printf("Downloading %s", u)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
