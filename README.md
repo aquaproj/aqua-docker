@@ -9,7 +9,7 @@ aqua-docker is a CLI installing CLIs in Docker images.
 ## :warning: Restriction
 
 aqua-docker assumes that installed CLIs work as a single executable file.
-So some tools such as [tfenv](https://github.com/tfutils/tfenv) can be supported.
+So some tools such as [tfenv](https://github.com/tfutils/tfenv) can't be supported.
 
 ## Requirements
 
