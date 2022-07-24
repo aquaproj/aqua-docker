@@ -24,7 +24,7 @@ e.g.
 ```dockerfile
 FROM golang:1.18.4 AS aqua
 COPY aqua.yaml /aqua.yaml
-RUN go run github.com/aquaproj/aqua-docker@v0.1.0 --aqua-version v1.17.1 -c aqua.yaml -o dist terraform gh
+RUN go run github.com/aquaproj/aqua-docker@v0.1.0 --aqua-version v1.17.1 --config /aqua.yaml --dest /dist golangci-lint actionlint reviewdog
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
@@ -35,7 +35,7 @@ COPY --from=aqua /dist/* /usr/local/bin/
 
 1. Install aqua
 1. Run `aqua i`
-1. Create a directory (By default, the directory path is `dist`, but you can change this by `-o` option) and copy files at the directory
+1. Create a directory (By default, the directory path is `dist`, but you can change this by `-dest` option) and copy files at the directory
 
 ## LICENSE
 

@@ -127,7 +127,12 @@ func installAqua(ctx context.Context, param *Param) error {
 		return fmt.Errorf("change aqua's file permission: %w", err)
 	}
 
-	u := fmt.Sprintf("https://github.com/aquaproj/aqua/releases/%s/download/aqua_%s_%s.tar.gz", param.AquaVersion, runtime.GOOS, runtime.GOARCH)
+	u := ""
+	if param.AquaVersion == "latest" {
+		u = fmt.Sprintf("https://github.com/aquaproj/aqua/releases/latest/download/aqua_%s_%s.tar.gz", runtime.GOOS, runtime.GOARCH)
+	} else {
+		u = fmt.Sprintf("https://github.com/aquaproj/aqua/releases/download/%s/aqua_%s_%s.tar.gz", param.AquaVersion, runtime.GOOS, runtime.GOARCH)
+	}
 	log.Printf("Downloading %s", u)
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
 	if err != nil {
