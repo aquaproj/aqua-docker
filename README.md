@@ -24,7 +24,7 @@ e.g.
 ```dockerfile
 FROM golang:1.18.4 AS aqua
 COPY aqua.yaml /aqua.yaml
-RUN go run github.com/aquaproj/aqua-docker@v0.1.0 --aqua-version v1.17.1 --config /aqua.yaml --dest /dist golangci-lint actionlint reviewdog
+RUN go run github.com/aquaproj/aqua-docker@v0.1.0 --aqua-version v1.17.1 --config /aqua.yaml --dest /dist actionlint reviewdog
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
