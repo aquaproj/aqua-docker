@@ -2,6 +2,12 @@
 
 Install tools in Docker image
 
+## :warning: Deprecated
+
+Please see the document.
+
+https://aquaproj.github.io/docs/tutorial-extras/build-container-image
+
 ## Overview
 
 aqua-docker is a CLI installing CLIs in Docker images.
